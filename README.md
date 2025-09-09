@@ -1,78 +1,37 @@
-# CS687 Capstone – Credit Card Fraud Detection with MLOPs Integration
+How to Run the Project
 
-Initial setup complete. Data preprocessing and cleaning started.
+Create Virtual Environment
 
-Credit Card Fraud Detection – Data Exploration & Preprocessing
+Run: python3 -m venv .venv
 
-Overview
-This script performs exploratory data analysis (EDA) and preprocessing on a credit card transaction dataset. The goal is to understand the dataset, identify imbalances, visualize patterns, and prepare it for machine learning model training.
+Activate:
 
-Steps Performed
-1. Import Required Libraries
-pandas, numpy – Data handling
+Mac/Linux: source .venv/bin/activate
 
-matplotlib, seaborn – Visualization
+Windows: .venv\Scripts\activate
 
-sklearn.preprocessing – Scaling features
+Install Dependencies
 
-2. Load Dataset
-python
-Copy
-Edit
-df = pd.read_csv("creditcard.csv")
-Reads the dataset into a pandas DataFrame.
+Run: pip install -r requirements.txt
 
-3. Overview of Dataset
-Shape of dataset – (rows, columns)
+Run Backend (Data Preparation)
 
-Info summary – column names, data types, null values.
+Navigate to the backend folder: cd backend
 
-4. Display First Few Rows
-Shows first 5 records for a quick view.
+Open the Jupyter notebook: jupyter notebook fraud_detection_backend.ipynb
 
-5. Missing Values Check
-Counts missing values in each column.
+Run Frontend (Web Application)
 
-6. Summary Statistics
-Uses .describe() to get count, mean, std, min, max, and percentiles for numeric columns.
+From the project root folder, run: streamlit run frontend/App.py
 
-7. Class Distribution Analysis
-Checks fraud vs non-fraud transactions.
+Usage Flow
 
-Visualizes using a count plot to highlight imbalance.
+Upload the dataset (creditcard.csv)
 
-8. Correlation Matrix
-Visualizes correlations between:
+Preprocess data and generate features
 
-Time
+Train models (Isolation Forest, XGBoost, etc.)
 
-Amount
+Evaluate performance (ROC-AUC, Recall, F1-score)
 
-Class
-
-Uses a heatmap for clarity.
-
-9. Duplicate Records Check
-Identifies and optionally removes duplicates.
-
-10. Feature Distribution
-Plots distribution of the Amount feature.
-
-11. Feature Scaling
-Uses StandardScaler to normalize:
-
-Amount → scaled_amount
-
-Time → scaled_time
-
-Drops original Amount and Time columns.
-
-12. Final Dataset Check
-Displays cleaned dataset shape after processing.
-
-Output
-EDA Results: Class imbalance plots, correlation heatmap, transaction amount distribution.
-
-Clean Dataset: Ready for modeling.
-
-
+Monitor data drift and export reports

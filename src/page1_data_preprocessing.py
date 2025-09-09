@@ -11,21 +11,13 @@ This module exposes `render()` which is called by the entry app.
 from __future__ import annotations
 from pathlib import Path
 from typing import List, Tuple
-from pathlib import Path
-from typing import List, Tuple
 
 import numpy as np
 import pandas as pd
 import streamlit as st
 
+# Use absolute import so it works when running App.py from project root
 from src.pipelines import run_preprocess, save_pipeline
-
-import numpy as np
-import pandas as pd
-import streamlit as st
-
-# Local modules (must exist in src/)
-from .pipelines import run_preprocess, save_pipeline
 
 
 DATA_DIR = Path("data")
@@ -81,8 +73,8 @@ Outputs are saved to:
     with c1:
         uploaded = st.file_uploader("Upload your dataset (CSV)", type=["csv"])
     with c2:
-        demo_path = DATA_DIR / "demo_creditcard.csv"
-        use_demo = st.checkbox("Use demo file (data/demo_creditcard.csv)", value=demo_path.exists())
+        default_path = DATA_DIR / "creditcard.csv"
+        use_default = st.checkbox("Use creditcard.csv from data/", value=default_path.exists())
 
     df = None
     source = None
@@ -94,16 +86,16 @@ Outputs are saved to:
         except Exception as e:
             st.error(f"Failed to read uploaded CSV: {e}")
             return
-    elif use_demo and demo_path.exists():
+    elif use_default and default_path.exists():
         try:
-            df = pd.read_csv(demo_path)
-            source = str(demo_path)
+            df = pd.read_csv(default_path)
+            source = str(default_path)
         except Exception as e:
-            st.error(f"Failed to read demo CSV: {e}")
+            st.error(f"Failed to read data/creditcard.csv: {e}")
             return
 
     if df is None:
-        st.info("Upload one CSV or enable the demo checkbox if a demo file exists in data/.")
+        st.info("Upload one CSV or tick 'Use creditcard.csv from data/' (place file at data/creditcard.csv).")
         return
 
     st.success(f"Loaded {len(df):,} rows × {df.shape[1]} columns from {source}.")
